@@ -62,7 +62,7 @@ drscl: $(OBJECTS) DRS.o averager.o drscl.o
 
 	
 drs_exam: $(OBJECTS) drs_exam.o $(SHARED_OBJECTS)
-	$(CXX) $(CFLAGS) $(OBJECTS) -lDRS -L. drs_exam.o -o drs_exam $(LIBS) $(WXLIBS)
+	$(CXX) $(CFLAGS) -L . $(OBJECTS) -lDRS  drs_exam.o -o drs_exam $(LIBS) $(WXLIBS)
 
 drs_exam_multi: $(OBJECTS) DRS.o averager.o drs_exam_multi.o
 	$(CXX) $(CFLAGS) $(OBJECTS) DRS.o averager.o drs_exam_multi.o -o drs_exam_multi $(LIBS) $(WXLIBS)
