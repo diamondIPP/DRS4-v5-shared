@@ -62,10 +62,12 @@ drscl: $(OBJECTS) DRS.o averager.o drscl.o
 
 	
 drs_exam: $(OBJECTS) drs_exam.o $(SHARED_OBJECTS)
-	$(CXX) $(CFLAGS) -L . $(OBJECTS) -lDRS  drs_exam.o -o drs_exam $(LIBS) $(WXLIBS)
+#	$(CXX) $(CFLAGS) -L . $(OBJECTS) -lDRS  drs_exam.o -o drs_exam $(LIBS) $(WXLIBS)
+	$(CXX) $(CFLAGS) $(OBJECTS) -L. drs_exam.o -lDRS -o drs_exam $(LIBS) $(WXLIBS)
 
 drs_exam_multi: $(OBJECTS) DRS.o averager.o drs_exam_multi.o
-	$(CXX) $(CFLAGS) $(OBJECTS) DRS.o averager.o drs_exam_multi.o -o drs_exam_multi $(LIBS) $(WXLIBS)
+    #old $(CXX) $(CFLAGS) $(OBJECTS) DRS.o averager.o drs_exam_multi.o -o drs_exam_multi $(LIBS) $(WXLIBS)
+	$(CXX) $(CFLAGS) $(OBJECTS) -L. DRS.o averager.o drs_exam_multi.o -o drs_exam_multi -lDRS $(LIBS) $(WXLIBS)
 
 main.o: src/main.cpp include/mxml.h include/DRS.h
 	$(CXX) $(CFLAGS) $(WXFLAGS) -c $<
@@ -93,8 +95,8 @@ $(SHARED_OBJECTS): %.so:  DRS.o mxml.o averager.o musbstd.o
 	# @ $@
 	# %.so
 	#g++ -Wall -shared -fPIC -o libDRS.so src/DRS.cpp src/averager.cpp src/mxml.c -I include/")
-	 $(CXX) $(CFLAGS) $(WXFLAGS) $(WXLIBS) $(LIBS) -Wall -shared -fPIC -o $@ -I include/ src/DRS.cpp src/averager.cpp src/mxml.c  src/musbstd.c -I include/
+	 $(CXX) $(CFLAGS) $(WXFLAGS) -Wall -shared -fPIC -o $@ -I include/ src/DRS.cpp src/averager.cpp src/mxml.c  src/musbstd.c $(LIBS) $(WXLIBS)  
 
 clean:
-	rm -f *.o drscl drsosc
+	rm -f *.o  *.so drscl drsosc
 
