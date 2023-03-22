@@ -107,7 +107,7 @@ public:
    bool GetMultiBoard()    { return m_multiBoard; }
    void SetSource(int board, int firstChannel, int chnSection);
    void SetRefclk(int board, bool flag);
-   bool GetRefclk()        { return m_refClk > 0; }
+   bool GetRefclk()        { return m_refClk > (bool *)0; }
    void SetRange(double range){ m_range[m_board] = range; }
    double GetRange()           { return m_range[m_board]; }
    void SetSpikeRemoval(bool flag) { m_spikeRemoval = flag; m_osci->SetSpikeRemoval(flag); }
