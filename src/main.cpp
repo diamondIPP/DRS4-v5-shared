@@ -55,7 +55,7 @@ double ss_nan()
 
 int ss_isnan(double x)
 {
-   return isnan(x);
+   return std::isnan(x);
 }
 
 void ss_sleep(int ms)

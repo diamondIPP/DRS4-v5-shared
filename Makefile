@@ -21,11 +21,12 @@ else
 DOS           = OS_LINUX
 endif
 
-CFLAGS        = -g -O2 -Wall -Wuninitialized -mmacosx-version-min=12.6 -fno-strict-aliasing -Iinclude -I/usr/local/include -D$(DOS) -DHAVE_USB -DHAVE_LIBUSB10 -DUSE_DRS_MUTEX
-LIBS          = -lpthread -lutil -lusb-1.0
+CFLAGS        = -g -O2 -Wall -Wuninitialized -fno-strict-aliasing -Iinclude -I/usr/include -I/usr/local/include -D$(DOS) -DHAVE_USB -DHAVE_LIBUSB10 -DUSE_DRS_MUTEX $(pkg-config --cflags gtk+-3.0)
+LIBS          = -lpthread -lutil -lusb-1.0 $(pkg-config --libs gtk+-3.0)
 
 ifeq ($(OS),Darwin)
 CFLAGS        += -stdlib=libc++
+CFLAGS        += -mmacosx-version-min=12.6 
 endif         
 
 # wxWidgets libs and flags
